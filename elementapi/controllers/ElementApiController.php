@@ -94,6 +94,7 @@ class ElementApiController extends BaseController
 			{
 				if (is_callable($config['handleNotFound'])) {
 					JsonHelper::sendJsonHeaders();
+					http_response_code(404);
 					echo json_encode(call_user_func($config['handleNotFound']));
 					craft()->end();
 				} else {
