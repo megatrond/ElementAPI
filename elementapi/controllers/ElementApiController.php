@@ -92,7 +92,14 @@ class ElementApiController extends BaseController
 
 			if (!$element)
 			{
-				throw new HttpException(404);
+				if (is_callable($config['handleNotFound'])) {
+					JsonHelper::sendJsonHeaders();
+					echo json_encode(call_user_func($config['handleNotFound']));
+					craft()->end();
+				} else {
+					throw new HttpException(404);
+
+				}
 			}
 
 			$resource = new Item($element, $transformer);
