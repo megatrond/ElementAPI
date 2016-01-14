@@ -1,5 +1,21 @@
 # Element API plugin for Craft
 
+This is a fork, with added support for a config param on the endpoint called `handleNotFound` to control what is returned when no elements are found when param `first` is set.
+
+To use it, simply add something like
+
+```php
+'handleNotFound' => function() {
+    return [
+	'error' => 404,
+	'message' => 'The entry could not be found'
+    ]
+}
+
+```
+
+to your endpoint config in `craft/config/elementapi.php`
+
 This plugin makes it easy to create a JSON API for your entries (and other element types) in [Craft](http://buildwithcraft.com).
 
 It’s powered by Phil Sturgeon’s excellent [Fractal](http://fractal.thephpleague.com/) package.
